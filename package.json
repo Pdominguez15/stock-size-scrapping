@@ -1,0 +1,24 @@
+{
+  "name": "scraping-telegram-bot",
+  "version": "1.0.0",
+  "description": "Scrape a product website check stock and send availability via telegram",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "Pedro Domínguez Aguilera",
+  "license": "MIT",
+  "scripts": {
+    "start": "wrangler dev",
+    "start-scheduled": "wrangler dev --test-scheduled",
+    "publish": "wrangler publish"
+  },
+  "devDependencies": {
+    "wrangler": "^2.6.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "itty-router": "^3.0.11",
+    "mongoose": "^6.8.4",
+    "realm-web": "^2.0.0"
+  }
+}

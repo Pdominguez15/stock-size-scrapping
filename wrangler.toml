@@ -1,0 +1,12 @@
+name = "scraping"
+main = "src/index.js"
+compatibility_date = "2023-01-11"
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+TOKEN_TELEGRAM = ""
+CHAT_ID = ""
+MAILSERVER = ""
+REALM_APP_NAME = ""
+REALM_APP_API_KEY = ""
