@@ -6,7 +6,9 @@ export const sendEmail = async (env, product) => {
     },
     body: JSON.stringify({
       email: product.notification,
-      product: product.name + " talla " + product.size,
+      name: product.name,
+      size: product.size,
+      url: product.url,
     }),
   });
 };

@@ -2,7 +2,7 @@ import { getProductName } from "../../helpers/getProductName";
 import { fetchApi } from "../fetch/fetchApi";
 
 const getUrlApi = async (url) => {
-  const urlApi = `${url}&ajax=true`;
+  const urlApi = url.includes("?") ? `${url}&ajax=true` : `${url}?ajax=true`;
 
   if (url.includes("share")) {
     const data = await fetchApi(urlApi);
