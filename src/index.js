@@ -1,5 +1,5 @@
 import { Router } from "itty-router";
-import { saveProduct } from "../bd/connection";
+import { saveProduct, getProducts } from "../bd/connection";
 
 import { isUrlValid } from "../helpers";
 
@@ -7,7 +7,7 @@ import { checkAvailabilityAndNotify, getProductInfo } from "../scraping";
 
 const router = Router();
 
-router.post("/getData", async (request) => {
+router.post("/productInfo", async (request) => {
   const params = await request.json();
 
   if (isUrlValid(params.url)) {
@@ -18,7 +18,19 @@ router.post("/getData", async (request) => {
   return new Response("Error with the params", { status: 400 });
 });
 
-router.post("/sendData", async (request, env) => {
+router.get("/products", async (request, env) => {
+  const notification = request.query?.notification;
+
+  if (!notification) {
+    return new Response("Missing data", { status: 400 });
+  }
+
+  const products = await getProducts(env, notification);
+
+  return new Response(JSON.stringify(products), { status: 200 });
+});
+
+router.post("/saveProduct", async (request, env) => {
   const product = await request.json();
 
   if (

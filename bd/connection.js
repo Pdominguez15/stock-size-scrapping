@@ -40,3 +40,15 @@ export const saveProduct = async (env, product) => {
   await insertProduct(user, product);
   await disconnectBD(user);
 };
+
+export const getProducts = async (env, notification) => {
+  const user = await connectionBD(env);
+  const client = user.mongoClient("mongodb-atlas");
+  const bd = client.db("cloudflare").collection("todos");
+
+  const result = bd.find({ notification });
+
+  await disconnectBD(user);
+
+  return result;
+};

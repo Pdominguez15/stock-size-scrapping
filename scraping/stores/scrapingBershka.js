@@ -72,7 +72,7 @@ export const isProductSizeAvailableBershka = async (product) => {
   const { url, size } = product;
 
   const urlApi = await getUrlApi(url);
-  const json = await customFetch(urlApi);
+  const json = await fetchApi(urlApi);
 
   const color = getColor(url);
 
