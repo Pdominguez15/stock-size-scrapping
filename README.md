@@ -58,7 +58,6 @@ If you'd like to contribute to this project, feel free to do so. You can submit 
 
 This project utilizes the following npm packages:
 
-- Cheerio: https://www.npmjs.com/package/cheerio
 - Itty-router: https://www.npmjs.com/package/itty-router
 - Mongoose: https://www.npmjs.com/package/mongoose
 - realm-web: https://www.npmjs.com/package/realm-web

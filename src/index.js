@@ -1,22 +1,9 @@
 import { Router } from "itty-router";
-import { saveProduct, getProducts } from "../bd/connection";
+import { saveProduct, getProducts, deleteProductAlert } from "../bd/connection";
 
-import { isUrlValid } from "../helpers";
-
-import { checkAvailabilityAndNotify, getProductInfo } from "../scraping";
+import { checkAvailabilityAndNotify } from "../scraping/checkAvailabilityAndNotify";
 
 const router = Router();
-
-router.post("/productInfo", async (request) => {
-  const params = await request.json();
-
-  if (isUrlValid(params.url)) {
-    const productInfo = await getProductInfo(params.url);
-    return new Response(JSON.stringify(productInfo), { status: 200 });
-  }
-
-  return new Response("Error with the params", { status: 400 });
-});
 
 router.get("/products", async (request, env) => {
   const notification = request.query?.notification;
@@ -30,11 +17,24 @@ router.get("/products", async (request, env) => {
   return new Response(JSON.stringify(products), { status: 200 });
 });
 
+router.delete("/product", async (request, env) => {
+  const id = request.query?.id;
+
+  if (!id) {
+    return new Response("Missing data", { status: 400 });
+  }
+
+  const response = await deleteProductAlert(env, id);
+
+  return new Response(JSON.stringify(response), { status: 200 });
+});
+
 router.post("/saveProduct", async (request, env) => {
   const product = await request.json();
 
   if (
     !product?.url ||
+    !product?.urlScraping ||
     !product?.size ||
     !product?.store ||
     !product?.name ||

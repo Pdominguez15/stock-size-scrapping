@@ -14,6 +14,7 @@ export const checkAvailabilityAndNotify = async (env) => {
   for (let i = 0; i < products.length; i++) {
     const product = products[i];
     const isAvailable = await scraping(product);
+
     if (isAvailable) {
       const response = await sendNotification(product, env);
       if (response.ok && product.notification.includes("@")) {

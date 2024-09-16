@@ -10,13 +10,13 @@
   "scripts": {
     "start": "wrangler dev",
     "start-scheduled": "wrangler dev --test-scheduled",
+    "login": "wrangler login",
     "publish": "wrangler publish"
   },
   "devDependencies": {
     "wrangler": "^2.6.2"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
     "itty-router": "^3.0.11",
     "mongoose": "^6.8.4",
     "realm-web": "^2.0.0"

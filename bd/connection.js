@@ -41,12 +41,40 @@ export const saveProduct = async (env, product) => {
   await disconnectBD(user);
 };
 
+export const deleteProductAlert = async (env, id) => {
+  const user = await connectionBD(env);
+  const client = user.mongoClient("mongodb-atlas");
+  const bd = client.db("cloudflare").collection("todos");
+
+  const result = await bd.deleteOne({ _id: Realm.BSON.ObjectId(id) });
+
+  await disconnectBD(user);
+
+  return result;
+};
+
 export const getProducts = async (env, notification) => {
   const user = await connectionBD(env);
   const client = user.mongoClient("mongodb-atlas");
   const bd = client.db("cloudflare").collection("todos");
 
-  const result = bd.find({ notification });
+  const result = await bd.aggregate([
+    {
+      $match: {
+        notification,
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        url: 1,
+        size: 1,
+        store: 1,
+        name: 1,
+        notification: 1,
+      },
+    },
+  ]);
 
   await disconnectBD(user);
 

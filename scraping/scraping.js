@@ -3,6 +3,7 @@ import {
   isProductSizeAvailablePullAndBear,
   isProductSizeAvailableStradivarius,
   isProductSizeAvailableZara,
+  isProductSizeAvailableMango,
 } from "./stores";
 
 export const scraping = async (product) => {
@@ -15,6 +16,8 @@ export const scraping = async (product) => {
     isAvailable = await isProductSizeAvailablePullAndBear(product);
   } else if (product.store === "bershka") {
     isAvailable = await isProductSizeAvailableBershka(product);
+  } else if (product.store === "mango") {
+    isAvailable = await isProductSizeAvailableMango(product);
   }
 
   return isAvailable;
